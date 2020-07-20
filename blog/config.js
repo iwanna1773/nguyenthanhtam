@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = {
-  url: 'https://lumen.netlify.com',
+  url: 'https://tamnguyen.work/',
   pathPrefix: '/',
-  title: 'Blog by John Doe',
-  subtitle: 'Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.',
+  title: 'Tâm Nguyễn',
+  subtitle: 'Blog viết ra với mục đích note lại những thứ mình học, và viết lại cho dễ nhớ !!!',
   copyright: '© All rights reserved.',
   disqusShortname: '',
   postsPerPage: 4,
@@ -25,9 +25,9 @@ module.exports = {
     }
   ],
   author: {
-    name: 'John Doe',
+    name: 'Tâm Nguyễn',
     photo: '/photo.jpg',
-    bio: 'Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.',
+    bio: 'Blog viết ra với mục đích note lại những thứ mình học, và viết lại cho dễ nhớ !!!',
     contacts: {
       email: '',
       facebook: '#',
