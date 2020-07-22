@@ -1,7 +1,107 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import styled from 'styled-components'
+
 import github from '../img/github-icon.svg'
-import logo from '../img/logo.svg'
+
+const NavbarStyled = styled.nav`
+  .container{
+    .navbar-brand{
+      align-items: center;
+      width: 100%;
+    }
+  }
+`
+const NavMenuStyled = styled.div`
+  &#navMenu{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 75%;
+    height: 100%;
+    right: 100%;
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 1;
+    display: block;
+    transition: all .4s cubic-bezier(.445,.050,.55,.95);
+    transition-duration: .4s;
+    z-index: 5;
+
+    &.is-active{
+      position: fixed;
+      right: 30%;
+      visibility: visible;
+      transition: all .4s cubic-bezier(.445,.050,.55,.95);
+      transition-duration: .4s;
+    }
+
+    div {
+      .navbar-item{
+        padding: 10px 60px;
+        color: #333;
+        text-decoration: none;
+        font-size: 19px;
+        text-transform: uppercase;
+        text-align: left;
+        font-weight: 300;
+      }
+    }
+  }
+`
+const MobileMenuOverlayStyle = styled.div`
+  transition: all 140ms cubic-bezier(.445,.050,.55,.95);
+
+  &.is-active{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 4;
+    cursor: pointer;
+    transition: all 140ms cubic-bezier(.445,.050,.55,.95);
+  }
+`
+const NavbarBurger = styled.div`
+  &.navbar-burger{
+    height: 3.8rem;
+    width: 4rem;
+    &.is-active{
+
+    }
+    div{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      span{
+        height: 1px;
+        width: 1.6rem;
+        left: auto;
+        background-color: #00b19e;
+        &:not(.is-active) {
+          &:nth-child(1){
+            top: 24%;
+          }
+          &:nth-child(2){
+            top: 40%;
+          }
+          &:nth-child(3){
+            top: 56%;
+          }
+        }
+      }
+    }
+  }
+`
+
+
+
+
 
 const Navbar = class extends React.Component {
   constructor(props) {
@@ -32,31 +132,46 @@ const Navbar = class extends React.Component {
     )
   }
 
+
   render() {
     const {navBarActiveClass} = this.state
     return (
-      <nav
+      <NavbarStyled
         className="navbar is-transparent"
         role="navigation"
         aria-label="main-navigation"
       >
+        <MobileMenuOverlayStyle className={`mobile-menu-overlay ${navBarActiveClass}`} onClick={this.toggleHamburger}/>
         <div className="container">
           <div className="navbar-brand">
-            <Link to="/" className="navbar-item" title="Logo">
-              <img src={logo} alt="Kaldi" style={{ width: '88px' }} />
-            </Link>
+          <div className="navbar-item">
+              <a
+                className="navbar-item"
+                href="https://github.com/iwanna1773/nguyenthanhtam"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="icon">
+                  <img src={github} alt="Github" />
+                </span>
+              </a>
+            </div>
             {/* Hamburger menu */}
-            <div
-              className={`navbar-burger burger ${navBarActiveClass}`}
+            <NavbarBurger
+              className={`navbar-burger burger ${navBarActiveClass} navbar-item`}
               data-target="navMenu"
               onClick={() => this.toggleHamburger()}
             >
-              <span />
-              <span />
-              <span />
+            <div>
+              <span className={navBarActiveClass}/>
+              <span className={navBarActiveClass}/>
+              <span className={navBarActiveClass}/>
             </div>
+            
+            </NavbarBurger>
+
           </div>
-          <div
+          <NavMenuStyled
             id="navMenu"
             className={`navbar-menu ${navBarActiveClass}`}
           >
@@ -77,21 +192,9 @@ const Navbar = class extends React.Component {
                 Form Examples
               </Link>
             </div>
-            <div className="navbar-end has-text-centered">
-              <a
-                className="navbar-item"
-                href="https://github.com/netlify-templates/gatsby-starter-netlify-cms"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="icon">
-                  <img src={github} alt="Github" />
-                </span>
-              </a>
-            </div>
-          </div>
+          </NavMenuStyled>
         </div>
-      </nav>
+      </NavbarStyled>
     )
   }
 }
